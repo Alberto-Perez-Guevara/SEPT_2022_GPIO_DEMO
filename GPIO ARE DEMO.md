@@ -279,25 +279,26 @@ int main () {
    }
 
    // 
-   // Green LED configuration 
+   // Green LED configuration (GPIOF-20)
    //
    greenLed.flags = GPIOHANDLE_REQUEST_OUTPUT;
    strncpy(greenLed.consumer_label, "GREEN LED",9);
    memset(greenLed.default_values, 0, sizeof(greenLed.default_values));
 
-   greenLed.lines            = 1;
-   greenLed.lineoffsets[0]   = 20;
+   // GPIOF pin 20 needs 1 GPIO line                                  
+   greenLed.lines            = 1;    
+   greenLed.lineoffsets[0]   = 20;  
 
    // 
-   // Red LED configuration 
+   // Red LED configuration  (GPIOF-29)
    //
    redLed.flags = GPIOHANDLE_REQUEST_OUTPUT;
    strncpy(redLed.consumer_label, "RED LED",9);
    memset(redLed.default_values, 0, sizeof(redLed.default_values));
 
+   // GPIOF pin 29 needs 1 GPIO line                       
    redLed.lines            = 1;
-   redLed.lineoffsets[0]   = 29;
-
+   redLed.lineoffsets[0]   = 29;   
 
    //
    // program GPIOF 20 to control Green LED
@@ -358,9 +359,15 @@ int main () {
      perror ("ERROR: unable to set RED LED - GPIOF 29");
    }
  
+   //                                                                         
+   // close device file handles
+   //
    close(gpioFile);
    close(redLed.fd);
    close(greenLed.fd);
+
+   // exit program
+   return 0;
 }
 
 ``` 
