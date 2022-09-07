@@ -7,10 +7,10 @@
 
 ## Software Setup
 
-1. Flash the NRE image to the IMX8ULP.
-2. Copy the ARE image using `sync-are-to-device`
-3. Connect to the NRE through SSH.
-4. Devices come up with unique hostnames in the form azsphere-XXXXXXXX.local. Names are reset each time the device is reflashed but stay the same between reboots. To find your devices name you have two options:
+1. Flash the NRE image to the IMX8ULP.[Azure Sphere documentation](https://github.com/Azure/azure-sphere-v2-nre-yocto/blob/c0df5a2978563d21c6dfbe80704de740b67b337a/docs/4-deploying-to-imx8ulp.md) for `deployin to imx8ulp`
+3. Copy the ARE image using [Azure Sphere documentation](https://github.com/Azure/azure-sphere-v2-nre-yocto/blob/c0df5a2978563d21c6dfbe80704de740b67b337a/docs/5-booting-are-vm.md) for`sync-are-to-device`
+4. Connect to the NRE through SSH.
+5. Devices come up with unique hostnames in the form azsphere-XXXXXXXX.local. Names are reset each time the device is reflashed but stay the same between reboots. To find your devices name you have two options:
 
 4.1.Connect to the serial console. You should see the hostname on the login prompt, like this:
 
@@ -83,6 +83,12 @@ echo 500 > /sys/class/gpio/export
 
 #base 480 + 29 for RED   LED base
 echo 509 > /sys/class/gpio/export
+
+#GPIO set as output 480 + 20 for GREEN LED base
+echo out > /sys/class/gpio/gpio500/direction
+
+#GPIO set as output 480 + 29 for RED   LED base
+echo out > /sys/class/gpio/gpio509/direction
 
 #Turn ON GPIO 20 (GREEN LED)
 echo 1 > /sys/class/gpio/gpio500/value     
