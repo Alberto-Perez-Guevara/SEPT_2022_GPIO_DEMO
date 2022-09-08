@@ -282,7 +282,7 @@ int main () {
    // Green LED configuration (GPIOF-20)
    //
    greenLed.flags = GPIOHANDLE_REQUEST_OUTPUT;
-   strncpy(greenLed.consumer_label, "GREEN LED",9);
+   strncpy(greenLed.consumer_label, "GREEN LED", GPIO_MAX_NAME_SIZE);
    memset(greenLed.default_values, 0, sizeof(greenLed.default_values));
 
    // GPIOF pin 20 needs 1 GPIO line                                  
@@ -293,7 +293,7 @@ int main () {
    // Red LED configuration  (GPIOF-29)
    //
    redLed.flags = GPIOHANDLE_REQUEST_OUTPUT;
-   strncpy(redLed.consumer_label, "RED LED",9);
+   strncpy(redLed.consumer_label, "RED LED", GPIO_MAX_NAME_SIZE);
    memset(redLed.default_values, 0, sizeof(redLed.default_values));
 
    // GPIOF pin 29 needs 1 GPIO line                       
@@ -315,6 +315,7 @@ int main () {
    if (ioctl(gpioFile, GPIO_GET_LINEHANDLE_IOCTL, &redLed) < 0) {
      perror("ERROR: unable to control RED LED - GPIOF 29");
      close(gpioFile);
+     close(greenLed.fd); // close green led file handler
      return -1;
    }
 
