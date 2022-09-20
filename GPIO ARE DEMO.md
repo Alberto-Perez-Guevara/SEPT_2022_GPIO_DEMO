@@ -247,10 +247,12 @@ EOF
  > GpioCtrl.c
 ``` 
 
-11.2 Edit the C file you can use this code as a simple example to experiment:  
-```bash  
+11.2 Edit the C file you can use this code as a simple example to experiment: 
+```bash
  vim GpioCtrl.c
- 
+```   
+  
+```bash  
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
